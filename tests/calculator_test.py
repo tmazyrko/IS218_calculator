@@ -44,3 +44,9 @@ def test_calculator_divide():
     calc = Calculator()
     calc.divide_number(2)
     assert calc.get_result() == 0
+
+def test_calculator_dividebyzero():
+    """Test for handling ZeroDivisionError exception"""
+    calc = Calculator()
+    calc.divide_number(0)
+    assert calc.get_result() == 0
