@@ -31,5 +31,9 @@ class Calculator:
 
     def divide_number(self, value_a):
         """ divide result by number """
-        self.result = self.result / value_a
-        return self.result
+        try:
+            self.result = self.result / value_a
+            return self.result
+        except ZeroDivisionError:
+            print('Cannot divide by zero!')
+            return 0
