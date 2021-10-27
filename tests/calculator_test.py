@@ -1,5 +1,5 @@
 """Testing the Calculator"""
-from calc.main import Calculator
+from calc.calculator import Calculator
 
 
 def test_calculator_add_static():
