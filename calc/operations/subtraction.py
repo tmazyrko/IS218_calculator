@@ -1,7 +1,7 @@
 """Addition Class"""
 
 
-class Addition:
+class Subtraction:
 
     @staticmethod
     def subtract(value_a, value_b):
