@@ -11,21 +11,7 @@ class Calculator:
         """ returns sum of two numbers """
         return Addition.add(value_a, value_b)
 
-    def subtract_number(self, value_a):
-        """ subtract number from result"""
-        self.result = self.result - value_a
-        return self.result
-
-    def multiply_number(self, value_a):
-        """ multiply number by result """
-        self.result = self.result * value_a
-        return self.result
-
-    def divide_number(self, value_a):
-        """ divide result by number """
-        try:
-            self.result = self.result / value_a
-            return self.result
-        except ZeroDivisionError:
-            print('Cannot divide by zero!')
-            return 0
+    @staticmethod
+    def subtract_numbers(value_a, value_b):
+        """ returns difference of two numbers """
+        return Subtraction.subtract(value_a, value_b)
