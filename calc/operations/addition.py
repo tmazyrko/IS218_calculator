@@ -1,5 +1,6 @@
 """Addition Class"""
 
+
 class Addition:
 
     @staticmethod
