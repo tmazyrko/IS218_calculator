@@ -1,5 +1,5 @@
-""" content of calculator.py#"""
-from calculator.main import inc
+""" content of calc.py#"""
+from calc.main import inc
 
 def test_answer():
     """This Tests the function"""

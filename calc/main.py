@@ -1,4 +1,4 @@
-""" Main calculator module """
+""" Main calc module """
 
 def inc(x_value):
     """ Increment Function adds one to the x_value"""
