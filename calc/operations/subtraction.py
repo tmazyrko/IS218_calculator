@@ -1,4 +1,4 @@
-"""Addition Class"""
+"""Subtraction Class"""
 
 
 class Subtraction:
