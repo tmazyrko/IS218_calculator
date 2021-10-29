@@ -7,11 +7,14 @@ from calc.operations.division import Division
 
 class Calculator:
     """ This is the Calculator class"""
+    history = []
 
     @staticmethod
     def add_numbers(value_a, value_b):
         """ returns sum of two numbers """
-        return Addition.add(value_a, value_b)
+        addition = Addition(value_a, value_b)
+        Calculator.history.append(addition)
+        return addition.get_result()
 
     @staticmethod
     def subtract_numbers(value_a, value_b):

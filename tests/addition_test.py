@@ -2,6 +2,7 @@
 from calc.operations.addition import Addition
 
 
-def test_calculator_add_static():
+def test_operation_addition():
     """Tests addition"""
-    assert Addition.add(1, 2) == 3
+    addition = Addition(1, 2)
+    assert addition.get_result() == 3
