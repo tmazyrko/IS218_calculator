@@ -1,8 +1,8 @@
 """Multiplication Class"""
 
 
-class Subtraction:
+class Multiplication:
 
     @staticmethod
-    def subtract(value_a, value_b):
+    def multiply(value_a, value_b):
         return value_a - value_b
