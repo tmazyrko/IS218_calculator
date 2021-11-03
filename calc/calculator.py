@@ -38,6 +38,10 @@ class Calculator:
         return division.get_result()
 
     @staticmethod
+    def history_length():
+        return len(Calculator.history)
+
+    @staticmethod
     def clear_history():
         """ clears the calculation history list """
         Calculator.history = []
