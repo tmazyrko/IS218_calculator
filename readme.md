@@ -1,5 +1,7 @@
 # Calculator Project Setup
-[![Build Status](https://app.travis-ci.com/tmazyrko/IS218_calculator.svg?branch=main)](https://app.travis-ci.com/tmazyrko/IS218_calculator)
+
+[![Build Status](https://app.travis-ci.com/tmazyrko/IS218_calculator.svg?branch=calc-v1)](https://app.travis-ci.com/tmazyrko/IS218_calculator)
+_(calc-v1 branch status)_
 
 To run tests, Lint, and Coverage report use this command:
 
