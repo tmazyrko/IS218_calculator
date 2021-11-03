@@ -1,9 +1,10 @@
 """Subtraction Class"""
+from calc.operations.calculation import Calculation
 
 
-class Subtraction:  # pylint: disable=too-few-public-methods
+class Subtraction(Calculation):  # pylint: disable=too-few-public-methods
     """Subtraction class"""
-    @staticmethod
-    def subtract(value_a, value_b):
+
+    def get_result(self):
         """Returns difference between two numbers"""
-        return value_a - value_b
+        return self.value_a - self.value_b
