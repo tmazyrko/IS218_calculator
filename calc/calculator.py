@@ -36,3 +36,8 @@ class Calculator:
         division = Division(value_a, value_b)
         Calculator.history.append(division)
         return division.get_result()
+
+    @staticmethod
+    def clear_history():
+        """ clears the calculation history list """
+        Calculator.history = []
