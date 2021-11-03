@@ -1,9 +1,10 @@
 """Multiplication Class"""
+from calc.operations.calculation import Calculation
 
 
-class Multiplication:  # pylint: disable=too-few-public-methods
+class Multiplication(Calculation):  # pylint: disable=too-few-public-methods
     """Multiplication class"""
-    @staticmethod
-    def multiply(value_a, value_b):
+
+    def get_result(self):
         """Returns multiple of two numbers"""
-        return value_a * value_b
+        return self.value_a * self.value_b
