@@ -4,7 +4,8 @@
 class Calculation:  # pylint: disable=too-few-public-methods
     """Calculation class"""
 
-    def __init__(self, value_a, value_b):
+    def __init__(self, *args):
         """Default constructor"""
-        self.value_a = value_a
-        self.value_b = value_b
+        self.values = []
+        for arg in args:
+            self.values.append(arg)
