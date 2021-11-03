@@ -11,3 +11,5 @@ branches:
   only:
     - main
     - development
+    - calc-v1
+    - calc-v2
