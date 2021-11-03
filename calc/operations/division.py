@@ -7,4 +7,7 @@ class Division(Calculation):  # pylint: disable=too-few-public-methods
 
     def get_result(self):
         """Returns division result of two numbers"""
-        return self.value_a / self.value_b
+        result = self.values[0]
+        for val in self.values[1:]:
+            result /= val
+        return result
