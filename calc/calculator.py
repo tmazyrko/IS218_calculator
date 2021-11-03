@@ -43,6 +43,11 @@ class Calculator:
         return len(Calculator.history)
 
     @staticmethod
+    def history_remove(index):
+        """ removes history calculation at provided index """
+        Calculator.history.pop(index)
+
+    @staticmethod
     def clear_history():
         """ clears the calculation history list """
         Calculator.history = []
