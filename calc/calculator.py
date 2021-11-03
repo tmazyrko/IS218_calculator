@@ -39,6 +39,7 @@ class Calculator:
 
     @staticmethod
     def history_length():
+        """ returns length of history list """
         return len(Calculator.history)
 
     @staticmethod
