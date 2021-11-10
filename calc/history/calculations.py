@@ -67,6 +67,6 @@ class Calculations: # pylint: disable=too-few-public-methods
         return Calculations.history.append(Multiplication.create(values))
 
     @staticmethod
-    def add_calculation_addition(values):
+    def add_calculation_division(values):
         """Create a Division using factory method create and add object to history"""
         return Calculations.history.append(Division.create(values))
