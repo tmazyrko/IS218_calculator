@@ -34,5 +34,5 @@ def test_calculator_multiply_static(clear_history_fixture):  # pylint: disable=u
 def test_calculator_divide_static(clear_history_fixture):  # pylint: disable=unused-argument,redefined-outer-name
     """ Testing that the calculator has a static method for division """
     values = (20.0, 2.0, 2.0)
-    Calculator.add_numbers(values)
+    Calculator.divide_numbers(values)
     assert Calculator.get_last_result_value() == 5.0
