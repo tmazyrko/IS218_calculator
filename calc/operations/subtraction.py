@@ -1,8 +1,8 @@
 """Subtraction Class"""
-from calc.operations.calculation import Calculation
+from calc.operations.operation import Operation
 
 
-class Subtraction(Calculation):  # pylint: disable=too-few-public-methods
+class Subtraction(Operation):  # pylint: disable=too-few-public-methods
     """Subtraction class"""
 
     def get_result(self):

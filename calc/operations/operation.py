@@ -1,12 +1,12 @@
-""" Calculation Class """
+""" Operation Class """
 
 
-class Calculation:  # pylint: disable=too-few-public-methods
-    """ Calculation abstract base class """
+class Operation:  # pylint: disable=too-few-public-methods
+    """ Operation abstract base class """
 
     def __init__(self, values: tuple):
         """ Default constructor """
-        self.values = Calculation.convert_args_to_tuple_of_float(values)
+        self.values = Operation.convert_args_to_tuple_of_float(values)
 
     @classmethod
     def create(cls, values: tuple):

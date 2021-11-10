@@ -1,8 +1,8 @@
 """Addition Class"""
-from calc.operations.calculation import Calculation
+from calc.operations.operation import Operation
 
 
-class Addition(Calculation):  # pylint: disable=too-few-public-methods
+class Addition(Operation):  # pylint: disable=too-few-public-methods
     """Addition class"""
 
     def get_result(self):

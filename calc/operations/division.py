@@ -1,8 +1,8 @@
 """Division Class"""
-from calc.operations.calculation import Calculation
+from calc.operations.operation import Operation
 
 
-class Division(Calculation):  # pylint: disable=too-few-public-methods
+class Division(Operation):  # pylint: disable=too-few-public-methods
     """Division class"""
 
     def get_result(self):
