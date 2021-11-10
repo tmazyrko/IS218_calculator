@@ -1,8 +1,9 @@
-"""Testing Addition class"""
+""" Testing Subtraction class """
 from calc.operations.subtraction import Subtraction
 
 
-def test_calculator_subtract_static():
-    """Tests subtraction"""
-    subtraction = Subtraction(5, 2)
-    assert subtraction.get_result() == 3
+def test_operation_subtraction():
+    """ Tests subtraction """
+    values = (5.0, 2.0)
+    subtraction = Subtraction(values)
+    assert subtraction.get_result() == 3.0

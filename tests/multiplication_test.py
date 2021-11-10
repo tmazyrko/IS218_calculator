@@ -1,8 +1,9 @@
-"""Testing Multiplication class"""
+""" Testing Multiplication class """
 from calc.operations.multiplication import Multiplication
 
 
-def test_calculator_multiply_static():
-    """Tests multiplication"""
-    multiplication = Multiplication(5, 2)
-    assert multiplication.get_result() == 10
+def test_operation_multiplication():
+    """ Tests multiplication """
+    values = (5.0, 2.0)
+    multiplication = Multiplication(values)
+    assert multiplication.get_result() == 10.0
