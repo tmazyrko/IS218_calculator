@@ -1,9 +1,13 @@
 """Addition Class"""
+from calc.operations.calculation import Calculation
 
 
-class Addition:  # pylint: disable=too-few-public-methods
+class Addition(Calculation):  # pylint: disable=too-few-public-methods
     """Addition class"""
-    @staticmethod
-    def add(value_a, value_b):
+
+    def get_result(self):
         """Returns sum of two numbers"""
-        return value_a + value_b
+        result = self.values[0]
+        for val in self.values[1:]:
+            result += val
+        return result
