@@ -6,29 +6,30 @@ class Calculator:
     """ Calculator class calls methods on the Calculations class """
 
     @staticmethod
-    def add_numbers(value_a, value_b):
-        """ returns sum of two numbers """
-        addition = Addition(value_a, value_b)
-        Calculator.history.append(addition)
-        return addition.get_result()
+    def add_numbers(tuple_values: tuple):
+        """ returns sum of numbers """
+        Calculations.add_calculation_addition(tuple_values)
+        return True
 
     @staticmethod
-    def subtract_numbers(value_a, value_b):
-        """ returns difference of two numbers """
-        subtraction = Subtraction(value_a, value_b)
-        Calculator.history.append(subtraction)
-        return subtraction.get_result()
+    def subtract_numbers(tuple_values: tuple):
+        """ returns difference of numbers """
+        Calculations.add_calculation_subtraction(tuple_values)
+        return True
 
     @staticmethod
-    def multiply_numbers(value_a, value_b):
-        """ returns multiple of two numbers """
-        multiplication = Multiplication(value_a, value_b)
-        Calculator.history.append(multiplication)
-        return multiplication.get_result()
+    def multiply_numbers(tuple_values: tuple):
+        """ returns multiple of numbers """
+        Calculations.add_calculation_multiplication(tuple_values)
+        return True
 
     @staticmethod
-    def divide_numbers(value_a, value_b):
-        """ returns division result of two numbers """
-        division = Division(value_a, value_b)
-        Calculator.history.append(division)
-        return division.get_result()
+    def divide_numbers(tuple_values: tuple):
+        """ returns division result of numbers """
+        Calculations.add_calculation_division(tuple_values)
+        return True
+
+    @staticmethod
+    def get_last_result_value():
+        """ gets the result of the calculation """
+        return Calculations.get_last_calculation_result()
