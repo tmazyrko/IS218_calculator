@@ -4,7 +4,7 @@
 class Calculation:  # pylint: disable=too-few-public-methods
     """ Calculation abstract base class """
 
-    def __init__(self, *args):
+    def __init__(self, values: tuple):
         """ Default constructor """
         self.values = Calculation.convert_args_to_tuple_of_float(values)
 
