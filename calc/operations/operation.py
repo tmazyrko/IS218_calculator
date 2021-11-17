@@ -21,5 +21,6 @@ class Operation:  # pylint: disable=too-few-public-methods
             list_values_float.append(float(item))
         return tuple(list_values_float)
 
-    def get_result(self):
+    def get_result(self):  # pylint: disable=no-self-use
+        """ Void method to be overwritten by child class """
         return
