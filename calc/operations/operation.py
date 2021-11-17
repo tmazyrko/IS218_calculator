@@ -20,3 +20,6 @@ class Operation:  # pylint: disable=too-few-public-methods
         for item in values:
             list_values_float.append(float(item))
         return tuple(list_values_float)
+
+    def get_result(self):
+        return
