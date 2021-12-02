@@ -1,8 +1,8 @@
 """ Testing the Calculator """
-import pandas as pd
 import pytest
 from calc.calculator import Calculator
 from calc.history.calculations import Calculations
+
 
 @pytest.fixture
 def clear_history_fixture():  # pylint: disable=redefined-outer-name
@@ -15,16 +15,6 @@ def test_calculator_add_static(clear_history_fixture):  # pylint: disable=unused
     values = (1.0, 2.0, 5.0)
     Calculator.add_numbers(values)
     assert Calculator.get_last_result_value() == 8.0
-
-
-def test_calculator_add_static_csv(clear_history_fixture):  # pylint: disable=unused-argument,redefined-outer-name
-    """ Testing that the calculator has a static method for addition, uses csv file for input data """
-    input_file = "addition_test_small.csv"
-    full_path = "tests/input_data/" + input_file
-    df = pd.read_csv(full_path)
-    for index, row in df.iterrows():
-        Calculator.add_numbers((row['value a'], row['value b']))
-        assert Calculator.get_last_result_value() == float(row['answer'])
 
 
 def test_calculator_subtract_static(clear_history_fixture):  # pylint: disable=unused-argument,redefined-outer-name
