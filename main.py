@@ -3,6 +3,7 @@ from calc.operations.addition import Addition
 from calc.operations.subtraction import Subtraction
 from calc.operations.multiplication import Multiplication
 from calc.operations.division import Division
+import pandas as pd
 import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
@@ -42,6 +43,16 @@ class Handler(FileSystemEventHandler):
         elif event.event_type == 'created':
             # Take any action here when a file is first created.
             print("Received created event - %s." % event.src_path)
+            dataframe = pd.read_csv(event.src_path)
+            if dataframe.columns[0] == 'operation':
+                for index, row_data in dataframe.iterrows():
+                    if row_data['operation'] == '+':
+                        values = []
+                        for val in row_data[1:]:
+                            values.append(val)
+                        addition = Addition.create(tuple(values))
+                        Calculations.add_calculation(addition)
+
 
         # elif event.event_type == 'modified':
             # Take any action here when a file is modified.
