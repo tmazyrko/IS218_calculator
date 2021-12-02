@@ -9,5 +9,9 @@ class Division(Operation):  # pylint: disable=too-few-public-methods
         """Returns division result of two numbers"""
         result = self.values[0]
         for val in self.values[1:]:
-            result /= val
+            try:
+                result /= val
+            except ZeroDivisionError:
+                print('Cannot divide by zero!')
+                return 0
         return result
