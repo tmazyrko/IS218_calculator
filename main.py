@@ -12,7 +12,8 @@ from calc.operations.multiplication import Multiplication
 from calc.operations.division import Division
 
 OUTPUT_FILEPATH = "data/output.txt"
-DONE_DIRECTORY = "data/done/"
+LOG_FILEPATH = "data/output.log"  # for logging errors such as divide-by-zero
+DONE_DIRECTORY = "data/done/"  # where to move input files after reading
 
 
 class Watcher:
