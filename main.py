@@ -16,6 +16,7 @@ DONE_DIRECTORY = "data/done/"
 
 
 class Watcher:
+    # pylint: disable=broad-except,too-few-public-methods
     """ Watches for filesystem changes in specified directory """
     DIRECTORY_TO_WATCH = "data/input"
 
@@ -36,26 +37,27 @@ class Watcher:
             self.observer.stop()
             self.observer.join()
             print("Exiting.")
-        except Exception as e:
+        except Exception as exception:
             self.observer.stop()
             self.observer.join()
-            print("Error")
+            print(exception)
 
 
 class Handler(FileSystemEventHandler):
+    # pylint: disable=no-member,inconsistent-return-statements,consider-using-with
     """ Handles events triggered by Watcher """
     @staticmethod
     def on_any_event(event):
         if event.is_directory:
             return None
 
-        elif event.event_type == 'created':
+        if event.event_type == 'created':
             # Take any action here when a file is first created.
             print("Received created event - %s." % event.src_path)
             filename = event.src_path.split('/')[-1]
             dataframe = pd.read_csv(event.src_path)
             if dataframe.columns[0] == 'operation':
-                output_file = open(OUTPUT_FILEPATH, "a")
+                output_file = open(OUTPUT_FILEPATH, "a", encoding="utf-8")
                 for index, row_data in dataframe.iterrows():
                     values = []
                     for val in row_data[1:]:
