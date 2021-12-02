@@ -53,7 +53,7 @@ class Handler(FileSystemEventHandler):
 
         if event.event_type == 'created':
             # Take any action here when a file is first created.
-            print("Received created event - %s." % event.src_path)
+            print(f"Received created event - {event.src_path}.")
             filename = event.src_path.split('/')[-1]
             dataframe = pd.read_csv(event.src_path)
             if dataframe.columns[0] == 'operation':
@@ -78,12 +78,11 @@ class Handler(FileSystemEventHandler):
                         print("Invalid operation symbol.")
                         return None
                     Calculations.add_calculation(calculation)
-                    output_string = "%s | %s | ROW %s | %s | %s \n" % (
-                        int(time.time()), filename,
-                        index + 1,
-                        calculation_name,
-                        Calculations.get_last_calculation_result()
-                    )
+                    output_string = f"{int(time.time())} | " \
+                                    f"{filename} | " \
+                                    f"ROW {index + 1} | " \
+                                    f"{calculation_name} | " \
+                                    f"{Calculations.get_last_calculation_result()}\n"
                     # print(output_string)
                     output_file.write(output_string)
                 output_file.close()
