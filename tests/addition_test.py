@@ -10,7 +10,8 @@ def test_operation_addition():
     assert addition.get_result() == 3.0
 
 
-def test_operation_addition_csv():  # pylint: disable=unused-argument,redefined-outer-name,unused-variable
+def test_operation_addition_csv():
+    # pylint: disable=unused-variable,unused-argument,redefined-outer-name
     """ Tests addition, uses csv file for input data """
     input_file = "addition_test_small.csv"
     full_path = "tests/input_data/" + input_file
