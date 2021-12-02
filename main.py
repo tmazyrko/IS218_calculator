@@ -9,6 +9,9 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 
+OUTPUT_FILE = "data/output.txt"
+
+
 class Watcher:
     DIRECTORY_TO_WATCH = "data/input"
 
@@ -45,6 +48,7 @@ class Handler(FileSystemEventHandler):
             print("Received created event - %s." % event.src_path)
             dataframe = pd.read_csv(event.src_path)
             if dataframe.columns[0] == 'operation':
+                output_file = open(OUTPUT_FILE, "a")
                 for index, row_data in dataframe.iterrows():
                     if row_data['operation'] == '+':
                         values = []
@@ -52,6 +56,10 @@ class Handler(FileSystemEventHandler):
                             values.append(val)
                         addition = Addition.create(tuple(values))
                         Calculations.add_calculation(addition)
+                        timestamp = int(time.time())
+                        output_string = "%s | %s | INDEX %s | OPERATION %s | %s \n" % (timestamp, event.src_path, index, row_data["operation"], Calculations.get_last_calculation_result())
+                        # print(output_string)
+                        output_file.write(output_string)
 
 
         # elif event.event_type == 'modified':
