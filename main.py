@@ -7,9 +7,10 @@ import pandas as pd
 import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+import shutil
 
-
-OUTPUT_FILE = "data/output.txt"
+OUTPUT_FILEPATH = "data/output.txt"
+DONE_DIRECTORY = "data/done/"
 
 
 class Watcher:
@@ -46,25 +47,41 @@ class Handler(FileSystemEventHandler):
         elif event.event_type == 'created':
             # Take any action here when a file is first created.
             print("Received created event - %s." % event.src_path)
+            filename = event.src_path.split('/')[-1]
             dataframe = pd.read_csv(event.src_path)
             if dataframe.columns[0] == 'operation':
-                output_file = open(OUTPUT_FILE, "a")
+                output_file = open(OUTPUT_FILEPATH, "a")
                 for index, row_data in dataframe.iterrows():
+                    values = []
+                    for val in row_data[1:]:
+                        values.append(val)
                     if row_data['operation'] == '+':
-                        values = []
-                        for val in row_data[1:]:
-                            values.append(val)
-                        addition = Addition.create(tuple(values))
-                        Calculations.add_calculation(addition)
-                        timestamp = int(time.time())
-                        output_string = "%s | %s | INDEX %s | OPERATION %s | %s \n" % (timestamp, event.src_path, index, row_data["operation"], Calculations.get_last_calculation_result())
-                        # print(output_string)
-                        output_file.write(output_string)
-
+                        calculation = Addition.create(tuple(values))
+                        calculation_name = "ADDITION"
+                    elif row_data['operation'] == '-':
+                        calculation = Subtraction.create(tuple(values))
+                        calculation_name = "SUBTRACTION"
+                    elif row_data['operation'] == '*':
+                        calculation = Multiplication.create(tuple(values))
+                        calculation_name = "MULTIPLICATION"
+                    elif row_data['operation'] == '/':
+                        calculation = Division.create(tuple(values))
+                        calculation_name = "DIVISION"
+                    else:
+                        print("Invalid operation symbol.")
+                        return None
+                    Calculations.add_calculation(calculation)
+                    output_string = "%s | %s | ROW %s | %s | %s \n" % (int(time.time()), filename, index + 1,
+                                                                       calculation_name,
+                                                                       Calculations.get_last_calculation_result())
+                    # print(output_string)
+                    output_file.write(output_string)
+                output_file.close()
+                shutil.move(event.src_path, DONE_DIRECTORY + filename)
 
         # elif event.event_type == 'modified':
-            # Take any action here when a file is modified.
-            # print("Received modified event - %s." % event.src_path)
+        # Take any action here when a file is modified.
+        # print("Received modified event - %s." % event.src_path)
 
 
 if __name__ == '__main__':
