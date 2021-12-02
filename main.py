@@ -19,6 +19,7 @@ DONE_DIRECTORY = "data/done/"  # where to move input files after reading
 class Watcher:
     # pylint: disable=broad-except,too-few-public-methods
     """ Watches for filesystem changes in specified directory """
+
     DIRECTORY_TO_WATCH = "data/input"
 
     def __init__(self):
@@ -47,6 +48,7 @@ class Watcher:
 class Handler(FileSystemEventHandler):
     # pylint: disable=no-member,inconsistent-return-statements,consider-using-with
     """ Handles events triggered by Watcher """
+
     @staticmethod
     def on_any_event(event):
         if event.is_directory:
@@ -59,6 +61,7 @@ class Handler(FileSystemEventHandler):
             dataframe = pd.read_csv(event.src_path)
             if dataframe.columns[0] == 'operation':
                 output_file = open(OUTPUT_FILEPATH, "a", encoding="utf-8")
+                log_file = open(LOG_FILEPATH, "a", encoding="utf-8")
                 for index, row_data in dataframe.iterrows():
                     values = []
                     for val in row_data[1:]:
@@ -79,14 +82,24 @@ class Handler(FileSystemEventHandler):
                         print("Invalid operation symbol.")
                         return None
                     Calculations.add_calculation(calculation)
-                    output_string = f"{int(time.time())} | " \
-                                    f"{filename} | " \
-                                    f"ROW {index + 1} | " \
-                                    f"{calculation_name} | " \
-                                    f"{Calculations.get_last_calculation_result()}\n"
-                    # print(output_string)
-                    output_file.write(output_string)
+                    result = Calculations.get_last_calculation_result()
+                    if result == "error":
+                        # print("Cannot divide by zero!")
+                        log_string = f"{int(time.time())} | " \
+                                     f"ERROR | " \
+                                     f"{filename} | " \
+                                     f"ROW {index + 1} | " \
+                                     f"Cannot divide by zero!\n"
+                        log_file.write(log_string)
+                    else:
+                        output_string = f"{int(time.time())} | " \
+                                        f"{filename} | " \
+                                        f"ROW {index + 1} | " \
+                                        f"{calculation_name} | " \
+                                        f"{Calculations.get_last_calculation_result()}\n"
+                        output_file.write(output_string)
                 output_file.close()
+                log_file.close()
                 shutil.move(event.src_path, DONE_DIRECTORY + filename)
             return None
 

@@ -12,6 +12,6 @@ class Division(Operation):  # pylint: disable=too-few-public-methods
             try:
                 result /= val
             except ZeroDivisionError:
-                print('Cannot divide by zero!')
-                return 0
+                # print('Cannot divide by zero!')
+                return "error"
         return result
