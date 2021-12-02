@@ -11,7 +11,7 @@ def test_operation_addition():
 
 
 def test_operation_addition_csv():  # pylint: disable=unused-argument,redefined-outer-name
-    """ Testing that the calculator has a static method for addition, uses csv file for input data """
+    """ Tests addition, uses csv file for input data """
     input_file = "addition_test_small.csv"
     full_path = "tests/input_data/" + input_file
     dataframe = pd.read_csv(full_path)
