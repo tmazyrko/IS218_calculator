@@ -1,25 +1,30 @@
+""" Main calculator app entrypoint """
+
+import time
+import shutil
+import pandas as pd
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 from calc.history.calculations import Calculations
 from calc.operations.addition import Addition
 from calc.operations.subtraction import Subtraction
 from calc.operations.multiplication import Multiplication
 from calc.operations.division import Division
-import pandas as pd
-import time
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
-import shutil
 
 OUTPUT_FILEPATH = "data/output.txt"
 DONE_DIRECTORY = "data/done/"
 
 
 class Watcher:
+    """ Watches for filesystem changes in specified directory """
     DIRECTORY_TO_WATCH = "data/input"
 
     def __init__(self):
+        """ Init """
         self.observer = Observer()
 
     def run(self):
+        """ Runs the observer loop """
         event_handler = Handler()
         self.observer.schedule(event_handler, self.DIRECTORY_TO_WATCH, recursive=True)
         self.observer.start()
@@ -31,14 +36,14 @@ class Watcher:
             self.observer.stop()
             self.observer.join()
             print("Exiting.")
-        except:
+        except Exception as e:
             self.observer.stop()
             self.observer.join()
             print("Error")
 
 
 class Handler(FileSystemEventHandler):
-
+    """ Handles events triggered by Watcher """
     @staticmethod
     def on_any_event(event):
         if event.is_directory:
@@ -71,13 +76,17 @@ class Handler(FileSystemEventHandler):
                         print("Invalid operation symbol.")
                         return None
                     Calculations.add_calculation(calculation)
-                    output_string = "%s | %s | ROW %s | %s | %s \n" % (int(time.time()), filename, index + 1,
-                                                                       calculation_name,
-                                                                       Calculations.get_last_calculation_result())
+                    output_string = "%s | %s | ROW %s | %s | %s \n" % (
+                        int(time.time()), filename,
+                        index + 1,
+                        calculation_name,
+                        Calculations.get_last_calculation_result()
+                    )
                     # print(output_string)
                     output_file.write(output_string)
                 output_file.close()
                 shutil.move(event.src_path, DONE_DIRECTORY + filename)
+            return None
 
         # elif event.event_type == 'modified':
         # Take any action here when a file is modified.
