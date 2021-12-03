@@ -20,7 +20,7 @@ def test_divide_by_zero():
 def test_operation_division_csv():
     # pylint: disable=unused-variable,unused-argument,redefined-outer-name
     """ Tests division, uses csv file for input data """
-    input_file = "multiplication_test_small.csv"
+    input_file = "division_test_small.csv"
     full_path = "tests/input_data/" + input_file
     dataframe = pd.read_csv(full_path)
     for index, row in dataframe.iterrows():
