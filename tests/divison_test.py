@@ -25,4 +25,6 @@ def test_operation_division_csv():
     dataframe = pd.read_csv(full_path)
     for index, row in dataframe.iterrows():
         division = Division.create((row['value a'], row['value b']))
-        assert division.get_result() == float(row['answer'])
+        result = division.get_result()
+        expected = float(row['answer'])
+        assert round(result, 5) == round(expected, 5)
