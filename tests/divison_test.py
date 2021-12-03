@@ -10,6 +10,13 @@ def test_operation_division():
     assert division.get_result() == 3.0
 
 
+def test_divide_by_zero():
+    """ Tests zero division error handling """
+    values = (10.0, 0.0)
+    division = Division.create(values)
+    assert division.get_result() == "error"
+
+
 def test_operation_division_csv():
     # pylint: disable=unused-variable,unused-argument,redefined-outer-name
     """ Tests division, uses csv file for input data """
