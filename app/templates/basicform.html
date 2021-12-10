@@ -10,7 +10,7 @@
 {% endblock %}
 {% block content %}
 
-    <h1>HTML Form</h1>
+    <h1>Input Form</h1>
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -26,7 +26,7 @@
         <label for="value1">Value 1:</label><br>
         <input type="text" id="value1" name="value1" value="1"><br>
         <label for="value2">Value 2:</label><br>
-        <input type="text" id="value2" name="value2" value="2"><br>
+        <input type="text" id="value2" name="value2" value="2"><br><br>
         <fieldset>
         <legend>Operation</legend>
           <div>
@@ -49,5 +49,4 @@
 
         <input type="submit" value="Submit">
     </form>
-    <a href="/good/1.0/2.0">One Plus Two Good</a><br><a href="/bad/1/2">One Plus Two Bad</a>
 {% endblock %}
