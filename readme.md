@@ -1,6 +1,9 @@
 # IS218 Calculator Project
 
-[![Build Status](https://app.travis-ci.com/tmazyrko/IS218_calculator.svg?branch=main)](https://app.travis-ci.com/tmazyrko/IS218_calculator)
+This branch sees the calculator go from a standalone Python program to a Flask web app.<br>
+I also added an error message for zero division attempts using Flask's integrated message flashing.
+
+[![Build Status](https://app.travis-ci.com/tmazyrko/IS218_calculator.svg?branch=calc-v5)](https://app.travis-ci.com/tmazyrko/IS218_calculator)
 
 ## Project Setup
 
