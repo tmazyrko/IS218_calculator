@@ -27,8 +27,8 @@ def basicform():
         if result == 'error':
             flash("Cannot divide by zero!")
             return render_template('basicform.html')
-        else:
-            return render_template('result.html', value1=value1, value2=value2, operation=operation, result=result)
+        return render_template('result.html', value1=value1, value2=value2,
+                               operation=operation, result=result)
     # Displays the form because if it isn't a post it is a get request
     else:
         return render_template('basicform.html')
@@ -47,5 +47,7 @@ def good_calc(value1, value2):
     """ good calculation route response"""
     my_tuple = (value1, value2)
     Calculator.add_numbers(my_tuple)
-    response = "The result of the calculation is: " + str(Calculator.get_last_result_value()) + '<a href="/"> back</a>'
+    response = "The result of the calculation is: " + \
+               str(Calculator.get_last_result_value()) + \
+               '<a href="/"> back</a>'
     return response
