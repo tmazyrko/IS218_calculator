@@ -12,6 +12,16 @@
 
     <h1>HTML Form</h1>
 
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger ms-3 me-3" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     <form action="/basicform" method="post">
         <label for="value1">Value 1:</label><br>
         <input type="text" id="value1" name="value1" value="1"><br>

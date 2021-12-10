@@ -1,10 +1,9 @@
 """ Flask web app """
-from flask import Flask, request
-from flask import render_template
+from flask import Flask, request, render_template, flash
 from calc.calculator import Calculator
 
 app = Flask(__name__)
-
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @app.route("/")
 def index():
@@ -25,7 +24,11 @@ def basicform():
         # this will call the correct operation
         getattr(Calculator, operation)(my_tuple)
         result = str(Calculator.get_last_result_value())
-        return render_template('result.html', value1=value1, value2=value2, operation=operation, result=result)
+        if result == 'error':
+            flash("Cannot divide by zero!")
+            return render_template('basicform.html')
+        else:
+            return render_template('result.html', value1=value1, value2=value2, operation=operation, result=result)
     # Displays the form because if it isn't a post it is a get request
     else:
         return render_template('basicform.html')
