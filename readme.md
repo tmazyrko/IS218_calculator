@@ -1,6 +1,8 @@
 # IS218 Calculator Project
 
-[![Build Status](https://app.travis-ci.com/tmazyrko/IS218_calculator.svg?branch=main)](https://app.travis-ci.com/tmazyrko/IS218_calculator)
+[![Build Status](https://app.travis-ci.com/tmazyrko/IS218_calculator.svg?branch=calc-v6)](https://app.travis-ci.com/tmazyrko/IS218_calculator)
+
+This branch implements the DataTables plugin and adds a page to demo an interactive table filled with sample data.
 
 ## Project Setup
 
