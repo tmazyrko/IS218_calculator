@@ -33,6 +33,33 @@ def basicform():
     return render_template('basicform.html')
 
 
+@app.route("/tabledemo")
+def tabledemo():
+    """ tabledemo route response """
+    return render_template('tabledemo.html')
+
+
+@app.route("/api/demodata")
+def demodata():
+    return {'data': [
+        {
+            "brand": "Ford",
+            "model": "Mustang",
+            "year": 1964
+        },
+        {
+            "brand": "Chevy",
+            "model": "Camaro",
+            "year": 1967
+        },
+        {
+            "brand": "Toyota",
+            "model": "Tacoma",
+            "year": 2021
+        }
+    ]}
+
+
 @app.route("/bad/<value1>/<value2>")
 def bad_calc(value1, value2):
     """ bad calculation route response """

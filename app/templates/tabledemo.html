@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Table Demo{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+    <table id="data" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Year</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $('#data').DataTable({
+                ajax: '/api/demodata',
+                columns: [
+                    {data: 'brand'},
+                    {data: 'model'},
+                    {data: 'year'}
+                ]
+            });
+        });
+    </script>
+{% endblock %}
