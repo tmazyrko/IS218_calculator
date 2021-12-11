@@ -14,4 +14,11 @@ _setup.py is a config file for pytest_
 
 ## Flash Message Demo
 
-![flash-error-demo](img/flash_error_demo.gif)
+![flash-error-demo](img/flash_error_demo.gif)<br>
+_Demo of Flask flash message when attempting to divide by zero._
+
+## DataTables Demo
+
+![datatables-demo](img/datatables_demo.gif)<br>
+Demo of interactive table filled with sample data.<br>
+[https://datatables.net](https://datatables.net/)
