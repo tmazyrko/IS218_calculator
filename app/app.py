@@ -41,6 +41,7 @@ def tabledemo():
 
 @app.route("/api/demodata")
 def demodata():
+    """ tabledemo json data api endpoint """
     return {'data': [
         {
             "brand": "Ford",
