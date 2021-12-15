@@ -33,6 +33,17 @@ def basicform():
     return render_template('basicform.html')
 
 
+@app.route("/calculator", methods=['GET'])
+def calculator_get():
+    """ GET handler for csv-based calculator """
+
+
+@app.route("/calculator", methods=['POST'])
+def calculator_post():
+    """ POST handler for csv-based calculator """
+
+
+
 @app.route("/tabledemo")
 def tabledemo():
     """ tabledemo route response """
