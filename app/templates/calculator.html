@@ -10,7 +10,7 @@
 {% endblock %}
 {% block content %}
 
-    <h1>Input Form</h1>
+    <h1>Calculator</h1>
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -23,10 +23,8 @@
     {% endwith %}
 
     <form action="/calculator" method="post">
-        <label for="value1">Value 1:</label><br>
-        <input type="text" id="value1" name="value1" value="1"><br>
-        <label for="value2">Value 2:</label><br>
-        <input type="text" id="value2" name="value2" value="2"><br><br>
+        <label for="values">Values <i>(comma-seperated, no spaces)</i>:</label><br>
+        <input type="text" id="values" name="values" value=""><br><br>
         <fieldset>
         <legend>Operation</legend>
           <div>
