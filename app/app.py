@@ -86,6 +86,12 @@ def calculator_result_table():
     return render_template('result-table.html')
 
 
+@app.route("/article/pylint")
+def article_pylint():
+    """ article route: pylint """
+    return render_template('article-pylint.html')
+
+
 @app.route("/bad/<value1>/<value2>")
 def bad_calc(value1, value2):
     """ bad calculation route response """
