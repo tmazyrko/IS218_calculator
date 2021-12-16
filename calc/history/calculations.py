@@ -1,5 +1,4 @@
 """Calculation history class"""
-import pandas as pd
 from calc.operations.addition import Addition
 from calc.operations.subtraction import Subtraction
 from calc.operations.multiplication import Multiplication
@@ -76,7 +75,7 @@ class Calculations:  # pylint: disable=too-few-public-methods
     def to_list_of_dicts():
         output_list = []
         op_count = Calculations.count_history()
-        for index in range(0, op_count - 1, 1):
+        for index in range(0, op_count, 1):
             calculation = Calculations.get_calculation(index)
             timestamp = calculation.get_timestamp()
             values = calculation.get_values()
