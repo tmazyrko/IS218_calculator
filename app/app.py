@@ -1,5 +1,5 @@
 """ Flask web app """
-from flask import Flask, request, render_template, flash
+from flask import Flask, request, render_template, flash, redirect
 from calc.calculator import Calculator
 
 app = Flask(__name__)
@@ -57,7 +57,7 @@ def calculator_post():
     if result == 'error':
         flash("Cannot divide by zero!")
         return render_template('calculator.html')
-    return render_template('result-table.html')
+    return redirect("result-table")
 
 
 @app.route("/api/calculator")
