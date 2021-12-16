@@ -73,6 +73,7 @@ class Calculations:  # pylint: disable=too-few-public-methods
 
     @staticmethod
     def to_list_of_dicts():
+        """Returns the calculation history as a list of dictionaries"""
         output_list = []
         op_count = Calculations.count_history()
         for index in range(0, op_count, 1):
@@ -89,6 +90,9 @@ class Calculations:  # pylint: disable=too-few-public-methods
                 operation = "Multiplication"
             elif isinstance(calculation, Division):
                 operation = "Division"
-            dictionary = {"timestamp": timestamp, "values": values, "operation": operation, "result": result}
+            dictionary = {"timestamp": timestamp,
+                          "values": values,
+                          "operation": operation,
+                          "result": result}
             output_list.append(dictionary)
         return output_list

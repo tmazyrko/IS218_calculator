@@ -36,4 +36,5 @@ class Calculator:
 
     @staticmethod
     def history_as_list_of_dicts():
+        """ gets calculation history as a list of dictionaries """
         return Calculations.to_list_of_dicts()

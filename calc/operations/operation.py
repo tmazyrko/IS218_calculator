@@ -8,9 +8,9 @@ class Operation:  # pylint: disable=too-few-public-methods
 
     def __init__(self, values: tuple):
         """ Default constructor """
-        tz = 'America/New_York'  # US East timezone
+        tzone = 'America/New_York'  # US East timezone
         self.values = Operation.convert_args_to_tuple_of_float(values)
-        self.timestamp = Operation.set_timestamp(tz)
+        self.timestamp = Operation.set_timestamp(tzone)
 
     @classmethod
     def create(cls, values: tuple):
@@ -26,9 +26,9 @@ class Operation:  # pylint: disable=too-few-public-methods
         return tuple(list_values_float)
 
     @staticmethod
-    def set_timestamp(tz):
+    def set_timestamp(timezone):
         """ Returns a formatted timestamp for the creation of an operation """
-        timestamp = datetime.datetime.now(pytz.timezone(tz))
+        timestamp = datetime.datetime.now(pytz.timezone(timezone))
         formatted_timestamp = timestamp.strftime("%Y-%m-%d %H:%M:%S (UTC%z)")
         return formatted_timestamp
 

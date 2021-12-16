@@ -40,7 +40,7 @@ def calculator_get():
 
 
 @app.route("/calculator", methods=['POST'])
-def calculator_post():
+def calculator_post():  # pylint: disable=bare-except
     """ POST handler for csv-based calculator """
     values = request.form['values']
     while True:
@@ -50,12 +50,11 @@ def calculator_post():
         except:
             flash("Input error. Please enter two or more numbers seperated by commas.")
             return render_template('calculator.html')
+        if len(numbers) < 2:
+            flash("Please enter more than one number.")
+            return render_template('calculator.html')
         else:
-            if len(numbers) < 2:
-                flash("Please enter more than one number.")
-                return render_template('calculator.html')
-            else:
-                break
+            break
     operation = request.form['operation']
     my_tuple = tuple(map(float, values.split(',')))
     if operation == "add_numbers":
