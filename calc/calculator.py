@@ -33,3 +33,7 @@ class Calculator:
     def get_last_result_value():
         """ gets the result of the calculation """
         return Calculations.get_last_calculation_result()
+
+    @staticmethod
+    def history_as_list_of_dicts():
+        return Calculations.to_list_of_dicts()
