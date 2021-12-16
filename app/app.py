@@ -43,6 +43,19 @@ def calculator_get():
 def calculator_post():
     """ POST handler for csv-based calculator """
     values = request.form['values']
+    while True:
+        values_list = values.split(',')
+        try:
+            numbers = [float(foobar.strip()) for foobar in values_list]
+        except:
+            flash("Input error. Please enter two or more numbers seperated by commas.")
+            return render_template('calculator.html')
+        else:
+            if len(numbers) < 2:
+                flash("Please enter more than one number.")
+                return render_template('calculator.html')
+            else:
+                break
     operation = request.form['operation']
     my_tuple = tuple(map(float, values.split(',')))
     if operation == "add_numbers":
