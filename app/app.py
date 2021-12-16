@@ -42,10 +42,9 @@ def calculator_get():
 @app.route("/calculator", methods=['POST'])
 def calculator_post():
     """ POST handler for csv-based calculator """
-    value1 = request.form['value1']
-    value2 = request.form['value2']
+    values = request.form['values']
     operation = request.form['operation']
-    my_tuple = (value1, value2)
+    my_tuple = tuple(map(float, values.split(',')))
     if operation == "add_numbers":
         Calculator.add_numbers(my_tuple)
     elif operation == "subtract_numbers":
