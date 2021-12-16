@@ -92,6 +92,24 @@ def article_pylint():
     return render_template('article-pylint.html')
 
 
+@app.route("/article/oop-terms")
+def article_oop_terms():
+    """ article route: pylint """
+    return render_template('article-oop-terms.html')
+
+
+@app.route("/article/oop-principles")
+def article_oop_principles():
+    """ article route: pylint """
+    return render_template('article-oop-principles.html')
+
+
+@app.route("/article/aaa-testing")
+def article_aaa_testing():
+    """ article route: pylint """
+    return render_template('article-aaa-testing.html')
+
+
 @app.route("/bad/<value1>/<value2>")
 def bad_calc(value1, value2):
     """ bad calculation route response """
