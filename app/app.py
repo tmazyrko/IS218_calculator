@@ -67,32 +67,10 @@ def calculator_table_data():
     return {'data': data}
 
 
-@app.route("/tabledemo")
-def tabledemo():
+@app.route("/result-table")
+def calculator_result_table():
     """ tabledemo route response """
-    return render_template('tabledemo.html')
-
-
-@app.route("/api/demodata")
-def demodata():
-    """ tabledemo json data api endpoint """
-    return {'data': [
-        {
-            "brand": "Ford",
-            "model": "Mustang",
-            "year": 1964
-        },
-        {
-            "brand": "Chevy",
-            "model": "Camaro",
-            "year": 1967
-        },
-        {
-            "brand": "Toyota",
-            "model": "Tacoma",
-            "year": 2021
-        }
-    ]}
+    return render_template('result-table.html')
 
 
 @app.route("/bad/<value1>/<value2>")
