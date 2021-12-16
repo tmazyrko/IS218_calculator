@@ -1,11 +1,12 @@
 """Calculation history class"""
+import pandas as pd
 from calc.operations.addition import Addition
 from calc.operations.subtraction import Subtraction
 from calc.operations.multiplication import Multiplication
 from calc.operations.division import Division
 
 
-class Calculations: # pylint: disable=too-few-public-methods
+class Calculations:  # pylint: disable=too-few-public-methods
     """Calculations class managing the history of calculations"""
 
     history = []
@@ -70,3 +71,25 @@ class Calculations: # pylint: disable=too-few-public-methods
     def add_calculation_division(values):
         """Create a Division using factory method create and add object to history"""
         return Calculations.history.append(Division.create(values))
+
+    @staticmethod
+    def to_list_of_dicts():
+        output_list = []
+        op_count = Calculations.count_history()
+        for index in range(0, op_count - 1, 1):
+            calculation = Calculations.get_calculation(index)
+            timestamp = calculation.get_timestamp()
+            values = calculation.get_values()
+            result = calculation.get_result()
+            operation = ""
+            if isinstance(calculation, Addition):
+                operation = "Addition"
+            elif isinstance(calculation, Subtraction):
+                operation = "Subtraction"
+            elif isinstance(calculation, Multiplication):
+                operation = "Multiplication"
+            elif isinstance(calculation, Division):
+                operation = "Division"
+            dictionary = {"timestamp": timestamp, "values": values, "operation": operation, "result": result}
+            output_list.append(dictionary)
+        return output_list
