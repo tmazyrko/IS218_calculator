@@ -42,7 +42,30 @@ def calculator_get():
 @app.route("/calculator", methods=['POST'])
 def calculator_post():
     """ POST handler for csv-based calculator """
+    value1 = request.form['value1']
+    value2 = request.form['value2']
+    operation = request.form['operation']
+    my_tuple = (value1, value2)
+    if operation == "add_numbers":
+        Calculator.add_numbers(my_tuple)
+    elif operation == "subtract_numbers":
+        Calculator.subtract_numbers(my_tuple)
+    elif operation == "multiply_numbers":
+        Calculator.multiply_numbers(my_tuple)
+    elif operation == "divide_numbers":
+        Calculator.divide_numbers(my_tuple)
+    result = str(Calculator.get_last_result_value())
+    if result == 'error':
+        flash("Cannot divide by zero!")
+        return render_template('calculator.html')
+    return render_template('result-table.html')
 
+
+@app.route("/api/calculator")
+def calculator_table_data():
+    """ calculator results table api endpoint """
+    data = Calculator.history_as_list_of_dicts()
+    return {'data': data}
 
 
 @app.route("/tabledemo")
