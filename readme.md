@@ -2,6 +2,8 @@
 
 [![Build Status](https://app.travis-ci.com/tmazyrko/IS218_calculator.svg?branch=main)](https://app.travis-ci.com/tmazyrko/IS218_calculator)
 
+### [Demo Video (YouTube)](https://youtu.be/90i1cFKxOq8)
+
 ## Project Setup
 
 To run tests, Lint, and Coverage report use this command:
