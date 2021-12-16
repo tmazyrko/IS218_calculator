@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block title %}OOP Principles{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="mt-5">
+        <h1>OOP Principles</h1>
+        <p>This article will briefly describe the four principles of Object-Oriented Programming—Encapsulation,
+            Inheritance, Polymorphism, and Abstraction—and explain them using code samples from a simple Python
+            calculator program (refer to the example GitHub project
+            <a href="https://github.com/tmazyrko/IS218_calculator/tree/calc-v3")>here</a>).</p>
+        <br>
+
+        <h3>Encapsulation</h3>
+        <p>Encapsulation is the concept of hiding data implementation by restricting access to public methods. In other
+            words, instance variables are kept private, and public accessor methods are used to access or modify said
+            variables. </p>
+        <p>Many parts of our calculator exhibit encapsulation but the most abundant examples can be found in the
+            Calculations class, which handles the history of calculations performed by the calculator. When we perform a
+            new calculation, that calculation is instantiated as a Calculation object and then stored in a list within
+            the Calculations class. We cannot simply access that list directly, instead we must use the accessor methods
+            we created.</p>
+        <p>For example, to get the latest Calculation object out of the history list, we must use the static method
+            <code>get_last_calculation_object</code>. Likewise, we can use the <code>get_last_calculation_result</code>
+            method to directly get the result of a Calculation object.</p>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #555555; font-weight: bold">@staticmethod</span>
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">get_last_calculation_object</span>():
+    <span style="color: #DD4422">&quot;&quot;&quot;Gets most recent calculation in history&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">return</span> Calculations<span style="color: #333333">.</span>history[<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>]
+
+<span style="color: #555555; font-weight: bold">@staticmethod</span>
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">get_last_calculation_result</span>():
+    <span style="color: #DD4422">&quot;&quot;&quot;Gets value of the result of most recent calculation in history&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">return</span> Calculations<span style="color: #333333">.</span>get_last_calculation_object()<span style="color: #333333">.</span>get_result()
+</pre></div>
+        <br>
+
+        <h3>Inheritance</h3>
+        <p>Inheritance is the principle wherein one object can acquire (aka extend) some or all of the properties of
+            another object. In the same way that a child inherits traits of their parents, a child class inherits fields
+            and methods from an existing parent class and can reuse (or overwrite) them. Inheritance comes in handy when
+            you have unique classes for different types of objects that have similarities due to some kind of
+            relationship. For example, trucks, cars, and golf carts are different in function, but they still share some
+            traits such as having a model, make, trim level, year, etc. - those traits could be defined in a base
+            Vehicle class.</p>
+        <p>When it comes to our calculator, we see inheritance in our implementation of the four main operations:
+            addition, subtraction, multiplication, and division. While each operation obviously is different—addition
+            must sum values together, division must divide numbers and also check for attempts to divide by zero,
+            etc.—they all must share some common functionality like accepting a Tuple of input values or converting
+            those input values into floats.</p>
+        <p>Therefore, we define an Operation base class and put all of the common functionality into it:</p>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Operation</span>:  <span style="color: #888888"># pylint: disable=too-few-public-methods</span>
+    <span style="color: #DD4422">&quot;&quot;&quot; Operation abstract base class &quot;&quot;&quot;</span>
+
+    <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">__init__</span>(<span style="color: #007020">self</span>, values: <span style="color: #007020">tuple</span>):
+        <span style="color: #DD4422">&quot;&quot;&quot; Default constructor &quot;&quot;&quot;</span>
+        <span style="color: #007020">self</span><span style="color: #333333">.</span>values <span style="color: #333333">=</span> Operation<span style="color: #333333">.</span>convert_args_to_tuple_of_float(values)
+
+    <span style="color: #555555; font-weight: bold">@classmethod</span>
+    <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">create</span>(cls, values: <span style="color: #007020">tuple</span>):
+        <span style="color: #DD4422">&quot;&quot;&quot; Factory method &quot;&quot;&quot;</span>
+        <span style="color: #008800; font-weight: bold">return</span> cls(values)
+
+    <span style="color: #555555; font-weight: bold">@staticmethod</span>
+    <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">convert_args_to_tuple_of_float</span>(values):
+        <span style="color: #DD4422">&quot;&quot;&quot; Standardizes values to a list of floats &quot;&quot;&quot;</span>
+        list_values_float <span style="color: #333333">=</span> []
+        <span style="color: #008800; font-weight: bold">for</span> item <span style="color: #000000; font-weight: bold">in</span> values:
+            list_values_float<span style="color: #333333">.</span>append(<span style="color: #007020">float</span>(item))
+        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #007020">tuple</span>(list_values_float)
+</pre></div>
+        <br>
+        <p>Then, we can extend the Operation class when making the individual operations classes and add each
+            operation’s unique functionality while also pulling in the methods from the base class:</p>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">calc.operations.operation</span> <span style="color: #008800; font-weight: bold">import</span> Operation
+
+<span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Addition</span>(Operation):  <span style="color: #888888"># pylint: disable=too-few-public-methods</span>
+    <span style="color: #DD4422">&quot;&quot;&quot;Addition class&quot;&quot;&quot;</span>
+
+    <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">get_result</span>(<span style="color: #007020">self</span>):
+        <span style="color: #DD4422">&quot;&quot;&quot;Returns sum of two numbers&quot;&quot;&quot;</span>
+        result <span style="color: #333333">=</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>values[<span style="color: #0000DD; font-weight: bold">0</span>]
+        <span style="color: #008800; font-weight: bold">for</span> val <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>values[<span style="color: #0000DD; font-weight: bold">1</span>:]:
+            result <span style="color: #333333">+=</span> val
+        <span style="color: #008800; font-weight: bold">return</span> result
+</pre></div>
+        <p class="fst-italic">Addition.py</p>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">calc.operations.operation</span> <span style="color: #008800; font-weight: bold">import</span> Operation
+
+<span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Division</span>(Operation):  <span style="color: #888888"># pylint: disable=too-few-public-methods</span>
+    <span style="color: #DD4422">&quot;&quot;&quot;Division class&quot;&quot;&quot;</span>
+
+    <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">get_result</span>(<span style="color: #007020">self</span>):
+        <span style="color: #DD4422">&quot;&quot;&quot;Returns division result of two numbers&quot;&quot;&quot;</span>
+        result <span style="color: #333333">=</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>values[<span style="color: #0000DD; font-weight: bold">0</span>]
+        <span style="color: #008800; font-weight: bold">for</span> val <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">self</span><span style="color: #333333">.</span>values[<span style="color: #0000DD; font-weight: bold">1</span>:]:
+            result <span style="color: #333333">/=</span> val
+        <span style="color: #008800; font-weight: bold">return</span> result
+</pre></div>
+        <p class="fst-italic">Division.py</p>
+        <p>Notice how Addition and Division import the Operation class, and then include it as an argument for their own class definitions.</p>
+        <br>
+
+        <h3>Polymorphism</h3>
+        <p>Polymorphism is the ability to present the same interface for differing underlying forms. It goes hand in
+            hand with, and is usually a product of, inheritance. In our Calculator example project, inheritance is used
+            in the implementation of the four main operations—addition, subtraction, multiplication, and division—and it
+            is there where we can also find an example of polymorphism.</p>
+        <p>All four operations have different ways of modifying the values and getting a result (as in, addition is one
+            number plus another, subtraction is minus, etc). However, thanks to polymorphism, we can interact with
+            instances of each type of operation in the same ways, meaning that we can call the get_result method on an
+            operation object with no regard for the actual type of operation.</p>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #555555; font-weight: bold">@staticmethod</span>
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">get_last_calculation_result</span>():
+    <span style="color: #DD4422">&quot;&quot;&quot;Gets value of the result of most recent calculation in history&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">return</span> Calculations<span style="color: #333333">.</span>get_last_calculation_object()<span style="color: #333333">.</span>get_result()
+</pre></div>
+        <br>
+        In the Calculations class, the <code>get_last_calculation_result</code> function (along with
+        <code>get_first_calculation_result</code>) can work the way they do because of polymorphism. Even though the
+        history list in the Calculations class will contain any number of the four types of operations objects, we can
+        access the result of any of those objects with the same get_result method.</p>
+        <br>
+
+        <h3>Abstraction</h3>
+        <p>The goal of abstraction is to handle complexity by hiding unnecessary details from the user. This enables a
+            user to implement more complex logic on top of the provided abstraction without understanding or even
+            thinking about all the hidden complexity.</p>
+        <p>In our example Calculator project, abstraction is exhibited in the Calculations history class, which allows
+            us to easily do calculations by instantiating operations, store calculations in the history, and get results
+            of calculations.</p>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #555555; font-weight: bold">@staticmethod</span>
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">add_calculation_addition</span>(values):
+    <span style="color: #DD4422">&quot;&quot;&quot;Create an Addition using factory method create and add object to history&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">return</span> Calculations<span style="color: #333333">.</span>history<span style="color: #333333">.</span>append(Addition<span style="color: #333333">.</span>create(values))
+</pre></div>
+        <br>
+        <p>Calling the <code>add_calculation_addition</code> method requests input values from the user and does the
+            work of instantiating an Addition object using its create method, as well as appending that object to the
+            Calculations history list which the user should not have to interface with directly.</p>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #555555; font-weight: bold">@staticmethod</span>
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">get_last_calculation_result</span>():
+    <span style="color: #DD4422">&quot;&quot;&quot;Gets value of the result of most recent calculation in history&quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">return</span> Calculations<span style="color: #333333">.</span>get_last_calculation_object()<span style="color: #333333">.</span>get_result()
+</pre></div>
+        <br>
+        <p>Likewise, a method such as <code>get_last_calculation_result</code> does the work of getting the most recent
+            calculation object from the history and then returning the result using that calculation’s get_result
+            method.</p>
+        <br>
+
+        <a href="">GitHub Project for Reference</a>
+        <br><br>
+    </div>
+</div>
+{% endblock %}

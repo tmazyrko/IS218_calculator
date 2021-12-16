@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}AAA Testing{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="mt-5">
+        <h1>AAA Testing with Python</h1>
+        <p>The AAA of “AAA Testing” stands for Arrange-Act-Assert, a pattern of testing that has become a de-facto
+            standard in the software development industry.</p>
+        <br>
+
+        <h3>Importance of Testing</h3>
+        <p>Unit testing helps identify issues with software as changes are implemented, and ensures that all code meets
+            quality standards before it's deployed. Over the course of the product development life cycle, unit testing
+            saves time and money, and helps developers write better code with greater efficiency. A huge benefit of unit
+            tests is that each test isolates a function, class or method and only tests that piece of code, meaning that
+            when there is an issue it’s much easier to track down and fix.</p>
+        <br>
+
+        <h3>Using the AAA Pattern</h3>
+        <p>The AAA testing pattern suggests that a test method should be divided into three sections: arrange, act, and
+            assert, with each being responsible only for the part it is named after.</p>
+        <p>The <b>Arrange</b> part of the pattern is for setting up the test case. That is, handling any input data,
+            configuration, preparing a database, etc.</p>
+        <p>The <b>Act</b> part of the pattern covers the actual testing. This could mean calling a function/method,
+            calling a REST API, interacting with a web page, etc.</p>
+        <p>Finally, the <b>Assert</b> part of the pattern deals with comparing an expected outcome to the results of the
+            Act steps. In other words, assertions check whether the test passed or failed.</p>
+        <p>Of course, the AAA pattern is just one way of structuring testing, and shouldn’t be treated as gospel.
+            Following the pattern is not a requirement, but it is a great way to structure test cases to make them easy
+            to write and easy to understand. Here is an example of the AAA pattern in action in the unit tests for our
+            Calculator project:</p>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">test_calculator_add_static</span>(clear_history_fixture):  <span style="color: #888888"># pylint: disable=unused-argument,redefined-outer-name</span>
+    <span style="color: #DD4422">&quot;&quot;&quot; Testing that the calculator has a static method for addition &quot;&quot;&quot;</span>
+    values <span style="color: #333333">=</span> (<span style="color: #6600EE; font-weight: bold">1.0</span>, <span style="color: #6600EE; font-weight: bold">2.0</span>, <span style="color: #6600EE; font-weight: bold">5.0</span>)  <span style="color: #888888"># Arrange</span>
+    Calculator<span style="color: #333333">.</span>add_numbers(values)  <span style="color: #888888"># Act</span>
+    <span style="color: #008800; font-weight: bold">assert</span> Calculator<span style="color: #333333">.</span>get_last_result_value() <span style="color: #333333">==</span> <span style="color: #6600EE; font-weight: bold">8.0</span>  <span style="color: #888888"># Assert</span>
+</pre></div>
+        <br>
+
+        <h3>Using external data for Python testing</h3>
+        <p>The above example uses hard-coded input values which technically works, but is not always the most optimal or
+            comprehensive way of testing. Instead, we can read input data from an external data file, where the benefit
+            is that we can easily modify the input data without having to touch any code.</p>
+        <p>When it comes to Python, we can use the <a href="https://pandas.pydata.org/">pandas</a> library to read input
+            values from a csv (comma separated values) file and loop through them for our tests. Here is what one such
+            csv file might look like for our Calculator project tests:</p>
+<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">value a,value b,answer
+<span style="color: #666666">8326</span>,<span style="color: #666666">1643</span>,<span style="color: #666666">9969</span>
+<span style="color: #666666">2066</span>,<span style="color: #666666">4942</span>,<span style="color: #666666">7008</span>
+<span style="color: #666666">7794</span>,<span style="color: #666666">127</span>,<span style="color: #666666">7921</span>
+<span style="color: #666666">3808</span>,<span style="color: #666666">789</span>,<span style="color: #666666">4597</span>
+<span style="color: #666666">6285</span>,<span style="color: #666666">7036</span>,<span style="color: #666666">13321</span>
+</pre></div>
+        <p class="fst-italic">addition_test_values.csv</p>
+        <p>And here is what the Python code would look like for a test of the Addition operation that uses that csv
+            file:</p>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">pandas</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">pd</span>
+data_path <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;../tests_data/addition_test_values.csv&quot;</span>
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">test_addition_from_csv</span>():
+    dataframe <span style="color: #333333">=</span> pd<span style="color: #333333">.</span>read_csv(data_path)
+    <span style="color: #008800; font-weight: bold">for</span> index, row <span style="color: #000000; font-weight: bold">in</span> dataframe<span style="color: #333333">.</span>iterrows():
+        addition <span style="color: #333333">=</span> Addition<span style="color: #333333">.</span>create((row[<span style="background-color: #fff0f0">&#39;value a&#39;</span>], row[<span style="background-color: #fff0f0">&#39;value b&#39;</span>]))
+        result <span style="color: #333333">=</span> addition<span style="color: #333333">.</span>get_result()
+        <span style="color: #008800; font-weight: bold">assert</span> result <span style="color: #333333">==</span> <span style="color: #007020">float</span>(row[<span style="background-color: #fff0f0">&#39;answer&#39;</span>])
+</pre></div>
+        <br>
+        <br>
+        <a href="">GitHub Project for Reference</a>
+        <br><br>
+    </div>
+</div>
+{% endblock %}

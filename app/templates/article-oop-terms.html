@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}OOP Terms{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="mt-5">
+        <h1>OOP Terms</h1>
+        <p>Here you can find some definitions for commonly used terms in the realm of object-oriented programming.</p>
+
+        <p><b>Instantiation</b><br>
+            The realization of a predefined object; an instantiated object is given a name and created in memory or on disk using the structure described within a class declaration.</p>
+
+        <p><b>Object</b><br>
+            A value in memory referenced by an identifier. Can be a variable, a data structure, a function, a method, etc.</p>
+
+        <p><b>Class</b><br>
+            A program-code-template of a specified object; provides initial values for the object&rsquo;s state and implementations of its behavior.</p>
+
+        <p><b>Function</b><br>
+            A named section of a program that performs a specific task and can return a value.</p>
+
+        <p><b>Method</b><br>
+            A type of function that is part of a class and has access to the class&rsquo; member variables.</p>
+
+        <p><b>Namespace</b><br>
+            A grouping of symbols (such as variables and functions) that help avoid naming conflicts; a context where a set of names is relevant.</p>
+
+        <p><b>Constructor</b><br>
+            A special type of method that is called to create an object and prepare it for use, often accepting arguments that the constructor uses to set required member variables.</p>
+
+        <p><b>Fixture</b><br>
+            A method that sets up a system for the software testing process by initializing it and satisfying any preconditions the testing may depend on.</p>
+
+        <p><b>Type Hinting</b><br>
+            A formal way of statically indicating the type of a value in Python code. Specified in PEP 484 and introduced in Python 3.5.</p>
+        <p class="fst-italic">Python Example</p>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">greet</span>(name: <span style="color: #007020">str</span>) <span style="color: #333333">-&gt;</span> <span style="color: #007020">str</span>:
+    <span style="color: #008800; font-weight: bold">return</span> <span style="background-color: #fff0f0">&quot;Hello, &quot;</span> <span style="color: #333333">+</span> name
+</pre></div><br>
+
+        <p><b>Type Casting</b><br>
+            A way of specifying a type onto another variable.</p>
+        <p class="fst-italic">Python Example</p>
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">x <span style="color: #333333">=</span> <span style="color: #007020">int</span>(<span style="color: #0000DD; font-weight: bold">1</span>)   <span style="color: #888888"># x will be 1</span>
+y <span style="color: #333333">=</span> <span style="color: #007020">int</span>(<span style="color: #6600EE; font-weight: bold">2.8</span>) <span style="color: #888888"># y will be 2</span>
+z <span style="color: #333333">=</span> <span style="color: #007020">int</span>(<span style="background-color: #fff0f0">&quot;3&quot;</span>) <span style="color: #888888"># z will be 3</span>
+
+x <span style="color: #333333">=</span> <span style="color: #007020">float</span>(<span style="color: #0000DD; font-weight: bold">1</span>)     <span style="color: #888888"># x will be 1.0</span>
+y <span style="color: #333333">=</span> <span style="color: #007020">float</span>(<span style="color: #6600EE; font-weight: bold">2.8</span>)   <span style="color: #888888"># y will be 2.8</span>
+z <span style="color: #333333">=</span> <span style="color: #007020">float</span>(<span style="background-color: #fff0f0">&quot;3&quot;</span>)   <span style="color: #888888"># z will be 3.0</span>
+w <span style="color: #333333">=</span> <span style="color: #007020">float</span>(<span style="background-color: #fff0f0">&quot;4.2&quot;</span>) <span style="color: #888888"># w will be 4.2</span>
+
+x <span style="color: #333333">=</span> <span style="color: #007020">str</span>(<span style="background-color: #fff0f0">&quot;s1&quot;</span>) <span style="color: #888888"># x will be &#39;s1&#39;</span>
+y <span style="color: #333333">=</span> <span style="color: #007020">str</span>(<span style="color: #0000DD; font-weight: bold">2</span>)    <span style="color: #888888"># y will be &#39;2&#39;</span>
+z <span style="color: #333333">=</span> <span style="color: #007020">str</span>(<span style="color: #6600EE; font-weight: bold">3.0</span>)  <span style="color: #888888"># z will be &#39;3.0&#39; </span>
+</pre></div><br>
+
+        <p><b>Unit Testing</b><br>
+            A software testing method in which individual units of code are tested against known conditions and results to determine whether the code is fit for use.</p>
+
+        <p><b>Static</b><br>
+            A keyword indicating that the variable or method marked as such is available at the class level, meaning an instance of the class does not need to be created to access it. In Python, a static method is denoted by the decorator <code>@staticmethod</code>.</p>
+
+        <p><b>Class Method</b><br>
+            A method that cannot modify the state of any one object instance, but can modify class state that applies across all instances of that class. In Python, a class method is denoted by the decorator <code>@classmethod</code>.</p>
+
+        <p><b>Property</b><br>
+            A special type of class member that uses a field-like syntax for reading and writing, but property reads and writes are translated to &lsquo;getter&rsquo; and &lsquo;setter&rsquo; method calls. In Python, the <code>@property</code> decorator can be used to define a property.</p>
+
+        <p><b>Design pattern</b><br>
+            A typical solution to commonly occurring issues in software design; can be likened to a pre-made blueprint that can be adapted to solve a recurring design problem in your code.</p>
+
+        <p><b>Factory</b><br>
+            A method that provides an interface for creating objects in a superclass, which also allows subclasses to alter the type of object that will be created.</p>
+
+        <p><b>Facade</b><br>
+            A structural design pattern that provides a simplified interface to a library, framework, or other complex set of classes.</p>
+
+
+    </div>
+</div>
+{% endblock %}
