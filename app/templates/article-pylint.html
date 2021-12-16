@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Pylint{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="mt-5">
+        <h1>Pylint</h1>
+        <p>Pylint is a code, bug and quality checker for the Python programming language that tries to enforce a coding standard and looks for code smells. </p>
+        <br>
+        <h3>Getting Started</h3>
+        <p>Installing Pylint is simple, just use pip:</p>
+        <code>pip install pylint</code><br><br>
+        <p>To lint your code, invoke Pylint from the command line. The usage is:</p>
+        <code>pylint [options] modules_or_packages</code><br><br>
+        <p>You should give Pylint the name of a python package or module, or some number of packages or modules, but it
+            is also possible to analyze Python files (with a few restrictions). The thing to keep in mind is that Pylint
+            will try to convert the file name to a module name, and only be able to process the file if it succeeds.</p>
+        <code>pylint mymodule.py</code><br>
+        <p>The above should always work since the current working directory is automatically added on top of the python path.</p>
+        <code>pylint directory/mymodule.py</code><br>
+        <p>The above will work if ‘directory’ is a python package (i.e. has an __init__.py file or it is an implicit namespace package) or if "directory" is in the python path.</p>
+        <p class="fw-bold">For more help with using Pylint, refer to the documentation <a href="https://pylint.pycqa.org/en/latest/user_guide/run.html">here</a>.</p>
+        <br>
+        <h4 class="fst-italic">Tip: Pytest Plugin</h4>
+        <p>Pytest is a full-featured Python testing tool/framework that allows you to write and run a suite of unit
+            tests against your code. If you are already using Pytest for a Python project, you can download the
+            <a href="https://pypi.org/project/pytest-pylint/">pytest-pylint</a> plugin and run pylint in conjunction
+            with your unit tests so that any pylint errors will fail the build as well (configurable by severity).</p>
+        <p>After installing Pytest, run the following pip command:</p>
+        <code>pip install pytest-pylint</code><br><br>
+        <p>Then, simply run Pytest from the command line like so:</p>
+        <code>pytest --pylint</code><br><br>
+        <br>
+        <h4 class="fst-italic">Tip: Pytest Plugin</h4>
+        <p>What Pylint says about your code should not be taken about gospel, and it’s entirely possible that it will
+            warn you about things that you have conscientiously done. There are a few ways to deal with pylint’s
+            verboseness, such as creating a custom configuration file (explained
+            <a href="https://pylint.pycqa.org/en/latest/intro.html">here</a>).</p>
+        <p>However, a quick and dirty way of ignoring Pylint errors is to simply add a comment to a problematic
+            class/function with the following format:</p>
+        <code># pylint: disable=&lt;flags, comma-delimited></code>
+    </div>
+</div>
+{% endblock %}
